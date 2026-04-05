@@ -1,0 +1,22 @@
+{
+  "name": "sample-app",
+  "version": "1.0.0",
+  "description": "A production-ready cloud-native application",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "dev": "node app/index.js",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "cloud-native",
+    "kubernetes",
+    "docker"
+  ],
+  "author": "Shafat Bhat",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {}
+}
