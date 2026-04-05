@@ -1,0 +1,32 @@
+# Local development
+node_modules/
+.env
+.env.local
+.env.*.local
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Helm
+*.lock
+Chart.lock
+
+# Kube/ArgoCD
+kubeconfig
+.kube/
+
+# Logs
+*.log
+logs/
+
+# Temp files
+tmp/
+temp/
+*.tmp

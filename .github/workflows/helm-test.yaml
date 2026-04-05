@@ -1,0 +1,60 @@
+name: Helm Chart Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'helm/**'
+      - '.github/workflows/helm-test.yaml'
+
+jobs:
+  helm-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'latest'
+
+      - name: Lint Helm chart
+        run: helm lint helm/sample-app
+
+      - name: Template Helm chart
+        run: helm template sample-app helm/sample-app -f environments/dev/values.yaml
+
+      - name: Template Helm chart (staging)
+        run: helm template sample-app helm/sample-app -f environments/staging/values.yaml
+
+      - name: Template Helm chart (prod)
+        run: helm template sample-app helm/sample-app -f environments/prod/values.yaml
+
+  helm-dry-run:
+    runs-on: ubuntu-latest
+    needs: helm-lint
+    
+    services:
+      k8s:
+        image: kindest/node:latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'latest'
+
+      - name: Helm dry-run (dev)
+        run: helm install --dry-run sample-app helm/sample-app -f environments/dev/values.yaml
+
+      - name: Helm dry-run (staging)
+        run: helm install --dry-run sample-app helm/sample-app -f environments/staging/values.yaml
+
+      - name: Helm dry-run (prod)
+        run: helm install --dry-run sample-app helm/sample-app -f environments/prod/values.yaml

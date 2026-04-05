@@ -1,0 +1,17 @@
+apiVersion: v2
+name: sample-app
+description: A production-ready Helm chart for the Sample App
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - sample-app
+  - cloud-native
+  - kubernetes
+home: https://github.com/shafaat1/-cloud-native-app-template
+sources:
+  - https://github.com/shafaat1/-cloud-native-app-template
+maintainers:
+  - name: Cloud Native Team
+    email: team@example.com
+dependencies: []
